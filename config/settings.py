@@ -30,7 +30,12 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-SYSTEM_APPS = [
+THIRD_PARTY_APPS = [
+    "django_quill",
+]
+
+
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,7 +49,7 @@ CUSTOM_APPS = [
     "users.apps.UsersConfig",
 ]
 
-INSTALLED_APPS = SYSTEM_APPS + CUSTOM_APPS
+INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
 
 MIDDLEWARE = [
