@@ -31,3 +31,6 @@ class UserModel(AbstractBaseUser):
     # Premission for the admin page
     def has_module_perms(self, app_label):
         return self.is_staff
+
+    class Meta:
+        verbose_name_plural = "users"

@@ -4,4 +4,9 @@ from .models import BlogModel
 
 @admin.register(BlogModel)
 class BlogAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "title",
+        "user",
+        "get_comments_count",
+        "get_likes_count",
+    )

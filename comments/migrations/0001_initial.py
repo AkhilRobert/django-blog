@@ -3,7 +3,6 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import django_quill.fields
 
 
 class Migration(migrations.Migration):
@@ -11,23 +10,22 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('blog', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BlogModel',
+            name='CommentsModel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('content', django_quill.fields.QuillField()),
-                ('is_private', models.BooleanField(default=True)),
+                ('body', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('likes', models.ManyToManyField(blank=True, related_name='likes', to=settings.AUTH_USER_MODEL)),
+                ('blog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='blog.blogmodel')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'verbose_name_plural': 'blogs',
+                'verbose_name_plural': 'comments',
             },
         ),
     ]

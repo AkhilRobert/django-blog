@@ -44,12 +44,13 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-CUSTOM_APPS = [
+USER_APPS = [
     "blog.apps.BlogConfig",
     "users.apps.UsersConfig",
+    "comments.apps.CommentsConfig",
 ]
 
-INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + USER_APPS + THIRD_PARTY_APPS
 
 
 MIDDLEWARE = [
