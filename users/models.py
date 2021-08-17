@@ -15,11 +15,17 @@ class UserModel(AbstractBaseUser):
     is_verified = models.BooleanField(default=False)
     auth_type = models.CharField(default="EMAIL", choices=login_types, max_length=120)
     is_staff = models.BooleanField(default=False)
+    profile_photo = models.ImageField(
+        blank=True, null=True, upload_to="profile_photos/"
+    )
 
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["auth_type"]
+    REQUIRED_FIELDS = [
+        "auth_type",
+        "username",
+    ]
 
     def __str__(self):
         return self.email
