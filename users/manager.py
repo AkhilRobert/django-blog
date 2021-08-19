@@ -15,9 +15,10 @@ class UserManager(BaseUserManager):
         return user
 
     # Required to create the super user through the cmd
-    def create_superuser(self, email, password, auth_type):
+    def create_superuser(self, email, password, auth_type, username):
         user = self.create_user(email, password=password)
         user.auth_type = auth_type
+        user.username = username
         user.is_staff = True
         user.save(using=self._db)
         return user

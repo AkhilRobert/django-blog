@@ -1,9 +1,10 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
+from django.db.models.fields.related import OneToOneField
 from .manager import UserManager
 
 
-class UserModel(AbstractBaseUser):
+class User(AbstractBaseUser):
 
     login_types = (
         ("EMAIL", "EMAIL"),
@@ -17,6 +18,12 @@ class UserModel(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     profile_photo = models.ImageField(
         blank=True, null=True, upload_to="profile_photos/"
+    )
+    verification_token = OneToOneField(
+        "Verification",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     objects = UserManager()
@@ -40,3 +47,11 @@ class UserModel(AbstractBaseUser):
 
     class Meta:
         verbose_name_plural = "users"
+
+
+class Verification(models.Model):
+    token = models.UUIDField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return str(self.token)

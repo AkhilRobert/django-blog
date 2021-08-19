@@ -1,15 +1,15 @@
 from django.db import models
 from django_quill.fields import QuillField
-from users.models import UserModel
+from users.models import User
 
 
-class BlogModel(models.Model):
+class Blog(models.Model):
     title = models.CharField(max_length=255)
     content = QuillField()
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_private = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    likes = models.ManyToManyField(UserModel, related_name="likes", blank=True)
+    likes = models.ManyToManyField(User, related_name="likes", blank=True)
 
     def __str__(self):
         return self.title

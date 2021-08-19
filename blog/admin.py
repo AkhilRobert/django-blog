@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import BlogModel
+from .models import Blog
 
 
-@admin.register(BlogModel)
+@admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = (
         "title",

@@ -1,8 +1,13 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from .models import UserModel
+from .models import User, Verification
 
 
-@admin.register(UserModel)
-class UseerAdmin(ModelAdmin):
+@admin.register(User)
+class UserAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(Verification)
+class VerificationAdmin(ModelAdmin):
     pass

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import CommentsModel
+from .models import Comment
 
 
-@admin.register(CommentsModel)
+@admin.register(Comment)
 class CommentdAdmin(admin.ModelAdmin):
     pass

@@ -1,14 +1,11 @@
 from django.db import models
-from django.db.models.expressions import Case
-from users.models import UserModel
-from blog.models import BlogModel
+from users.models import User
+from blog.models import Blog
 
 
-class CommentsModel(models.Model):
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-    blog = models.ForeignKey(
-        BlogModel, on_delete=models.CASCADE, related_name="comments"
-    )
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
