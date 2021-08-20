@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.utils.html import strip_tags
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from .forms import RegisterForm
 from .models import User, Verification
 
@@ -70,3 +70,7 @@ class LoginUser(LoginView):
     template_name = "users/login.html"
     success_url = reverse_lazy("blog:home")
     redirect_authenticated_user = True
+
+
+class LogoutUser(LogoutView):
+    pass

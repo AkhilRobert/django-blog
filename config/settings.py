@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-*!sf2mbsk%1c9g)%!))wfdzb%xz%-n06=c*oc=e_hegz9v!u+)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -156,3 +156,4 @@ EMAIL_USE_TLS = True
 
 
 LOGIN_REDIRECT_URL = reverse_lazy("blog:home")
+LOGOUT_REDIRECT_URL = reverse_lazy("blog:home")
