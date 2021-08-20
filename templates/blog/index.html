@@ -5,4 +5,5 @@
 {% block content %}
   <p>welcome {{user.username}}</p>
   <a href="{% url 'user:register' %}">Register</a>
+  <a href="{% url 'user:login' %}">Login</a>
 {% endblock content %}

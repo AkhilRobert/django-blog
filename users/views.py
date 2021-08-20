@@ -1,16 +1,20 @@
 from uuid import UUID
 from django.shortcuts import redirect, render
 from django.http import HttpRequest
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.utils.html import strip_tags
+from django.contrib.auth.views import LoginView
 from .forms import RegisterForm
 from .models import User, Verification
 
 
 def register(request: HttpRequest) -> HttpRequest:
+    if request.user.is_authenticated:
+        return redirect(reverse("blog:home"))
+
     form = RegisterForm()
 
     if request.method == "POST":
@@ -60,3 +64,9 @@ def verify_user(request: HttpRequest, token: UUID) -> HttpRequest:
     user.save()
     verfiy_token.delete()
     return render(request, "users/verify/success.html")
+
+
+class LoginUser(LoginView):
+    template_name = "users/login.html"
+    success_url = reverse_lazy("blog:home")
+    redirect_authenticated_user = True
