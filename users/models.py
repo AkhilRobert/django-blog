@@ -1,5 +1,7 @@
+import datetime
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
+from django.utils import timezone
 from django.db.models.fields.related import OneToOneField
 from .manager import UserManager
 
@@ -52,6 +54,14 @@ class User(AbstractBaseUser):
 class Verification(models.Model):
     token = models.UUIDField()
     created_at = models.DateTimeField(auto_now_add=True)
+    created_at.editable = True
+
+    @property
+    def token_valid(self) -> bool:
+        expiry_time = self.created_at + datetime.timedelta(minutes=10)
+        # timezone.localtime() because we want local time ie, Asia/Kolkata
+        # timezone.now() returns UTC time
+        return expiry_time >= timezone.localtime()
 
     def __str__(self) -> str:
         return str(self.token)

@@ -10,4 +10,7 @@ class UserAdmin(ModelAdmin):
 
 @admin.register(Verification)
 class VerificationAdmin(ModelAdmin):
-    pass
+    list_display = (
+        "token",
+        "token_valid",
+    )
