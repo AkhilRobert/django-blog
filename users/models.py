@@ -54,7 +54,6 @@ class User(AbstractBaseUser):
 class Verification(models.Model):
     token = models.UUIDField()
     created_at = models.DateTimeField(auto_now_add=True)
-    created_at.editable = True
 
     @property
     def token_valid(self) -> bool:
