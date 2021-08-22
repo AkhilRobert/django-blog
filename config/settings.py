@@ -33,7 +33,8 @@ DEBUG = True
 # Application definition
 
 THIRD_PARTY_APPS = [
-    "django_quill",
+    "django_editorjs_fields",
+    "django_seed",
 ]
 
 
@@ -147,6 +148,7 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+EDITORJS_IMAGE_UPLOAD_PATH = "media/uploads"
 
 EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_HOST_USER = "apikey"  # this is exactly the value 'apikey'

@@ -1,11 +1,11 @@
 from django.db import models
-from django_quill.fields import QuillField
+from django_editorjs_fields import EditorJsJSONField
 from users.models import User
 
 
 class Blog(models.Model):
     title = models.CharField(max_length=255)
-    content = QuillField()
+    content = EditorJsJSONField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_private = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

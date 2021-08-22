@@ -27,6 +27,7 @@ class User(AbstractBaseUser):
         null=True,
         blank=True,
     )
+    is_superuser = models.BooleanField(default=False)
 
     objects = UserManager()
 

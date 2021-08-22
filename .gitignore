@@ -166,3 +166,4 @@ dmypy.json
 cython_debug/
 
 media/profile_photos
+media/media
