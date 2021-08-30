@@ -19,7 +19,7 @@
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto gap-3">
                 <li class="nav-item">
                     <a
-                        class="btn btn-outline-primary"
+                        class="btn btn-outline-primary mr-3"
                         aria-current="page"
                         href="{% url 'user:login' %}"
                     >Log in</a>
@@ -72,31 +72,38 @@
 
             <div class="dropdown mr-6">
                 <div
-                    class="d-flex gap-2 align-items-end"
+                    class="d-flex gap-2 align-items-end pointer"
                     id="dropdownMenuButton"
-                    data-bs-toggle="dropdown"
+                    data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
                     <p class="mb-0">{{ user.username }}</p>
-                    <img
-                        src="{{ MEDIA_URL }}{{ user.profile_photo }}"
-                        alt="{{ blog.user.username }}"
-                        class="image-fluid rounded-circle align-self-center"
-                        width="30"
-                        height="30"
-                        loading="lazy"
-                    >
+                    {% if user.profile_photo %}
+                        <img
+                            src="{{ user.profile_photo.url }}"
+                            alt="{{ blog.user.username }}"
+                            class="image-fluid rounded-circle align-self-center"
+                            width="30"
+                            height="30"
+                            loading="lazy"
+                        >
+                    {% else %}
+                        <img
+                            src="https://res.cloudinary.com/practicaldev/image/fetch/s--0m8Rs-k9--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/693571/b775ae4a-708a-43f7-aab3-343bcb1b9c2a.png"
+                            alt="{{ user.username }}"
+                            class="image-fluid rounded-circle align-self-center"
+                            width="30"
+                            height="30"
+                            loading="lazy"
+                        />
+                    {% endif %}
                 </div>
                 <div class="dropdown-menu nav__dropdown" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Create a post</a>
                     <a class="dropdown-item sign-out" href="{% url 'user:logout' %}">Sign Out</a>
                 </div>
             </div>
-
-
-
-
 
         {% endif %}
 

@@ -35,6 +35,7 @@ DEBUG = True
 THIRD_PARTY_APPS = [
     "django_editorjs_fields",
     "django_seed",
+    "crispy_forms",
 ]
 
 
@@ -167,6 +168,8 @@ LOGGING = {
         }
     },
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

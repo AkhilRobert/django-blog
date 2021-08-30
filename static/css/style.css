@@ -17,7 +17,7 @@
 }
 
 .link:hover {
-    color: var(--bs-blue);
+    color: var(--blue);
     cursor: pointer;
 }
 
@@ -30,5 +30,29 @@
 }
 
 .sign-out {
-    color: var(--bs-danger) !important;
+    color: var(--red) !important;
+}
+
+.gap-2 {
+    gap: 10px;
+} 
+
+.pointer {
+    cursor: pointer;
+} 
+
+.form {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.form__button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 720px) {
+    .form {
+        max-width: 90%;
+    }
 }

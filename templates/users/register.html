@@ -1,17 +1,28 @@
 {% extends 'partials/_base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block nav %}{% endblock nav %}
 
 {% block title %}Register{% endblock title %}
 
 {% block content %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{form}}
-        <button>submit</button>
-    </form>
+    <div class="d-flex align-items-center justify-content-center">
+        <h1>Login</h1>
+    </div>
 
+    <div class="container mt-5">
+        <form method="post" class="form" >
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="form__button">
+                <button class="btn btn-primary" >submit</button>
+            </div>
+
+            <p>Already have an account ? <a href="{% url 'user:login' %}">Login now</a></p>
+        </form>
+    </div>
 
 {% endblock content %}
 
