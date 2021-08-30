@@ -24,3 +24,11 @@
 .card-content > img {
     width: 100%;
 }
+
+.nav__dropdown {
+    left: -115px !important;
+}
+
+.sign-out {
+    color: var(--bs-danger) !important;
+}

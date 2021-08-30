@@ -35,7 +35,68 @@
 
         {% else %}
 
-            <p>{{ user.username }}</p>
+            {% comment %} <div class="d-flex gap-2 align-items-end" >
+                <p class="mb-0">{{ user.username }}</p>
+                <img
+                    src="{{ MEDIA_URL }}{{ user.profile_photo }}"
+                    alt="{{ blog.user.username }}"
+                    class="image-fluid rounded-circle align-self-center"
+                    width="30"
+                    height="30"
+                    loading="lazy"
+                >
+            </div>
+
+
+            <div class="dropdown">
+                <button class="btn dropdown-toggle d-flex align-items-end" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="d-flex gap-2 align-items-end" >
+                        <p class="mb-0">{{ user.username }}</p>
+                        <img
+                            src="{{ MEDIA_URL }}{{ user.profile_photo }}"
+                            alt="{{ blog.user.username }}"
+                            class="image-fluid rounded-circle align-self-center"
+                            width="30"
+                            height="30"
+                            loading="lazy"
+                        >
+                    </div>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div> {% endcomment %}
+
+
+            <div class="dropdown mr-6">
+                <div
+                    class="d-flex gap-2 align-items-end"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    <p class="mb-0">{{ user.username }}</p>
+                    <img
+                        src="{{ MEDIA_URL }}{{ user.profile_photo }}"
+                        alt="{{ blog.user.username }}"
+                        class="image-fluid rounded-circle align-self-center"
+                        width="30"
+                        height="30"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="dropdown-menu nav__dropdown" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Create a post</a>
+                    <a class="dropdown-item sign-out" href="{% url 'user:logout' %}">Sign Out</a>
+                </div>
+            </div>
+
+
+
+
 
         {% endif %}
 

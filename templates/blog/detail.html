@@ -14,7 +14,7 @@
                 <h1>{{blog.title}}</h1>
                 <div class="d-flex pt-2 pb-4 gap-2">
                     <img
-                        src="{{ MEDIA_URL }}/{{ blog.user.profile_photo }}"
+                        src="{{ MEDIA_URL }}{{ blog.user.profile_photo }}"
                         alt="{{ blog.user.username }}"
                         class="image-fluid rounded-circle align-self-center"
                         width="30"

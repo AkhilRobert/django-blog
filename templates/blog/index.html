@@ -15,7 +15,7 @@
 
                         {% if b.user.profile_photo %}
                             <img
-                                src="{{ MEDIA_URL }}/{{ b.user.profile_photo }}"
+                                src="{{ MEDIA_URL }}{{ b.user.profile_photo }}"
                                 alt="{{ b.user.username }}"
                                 class="image-fluid rounded-circle align-self-center"
                                 width="30"
