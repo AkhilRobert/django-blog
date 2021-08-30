@@ -15,3 +15,4 @@ class Home(ListView):
 class BlogDetail(DetailView):
     model = Blog
     template_name = "blog/detail.html"
+    context_object_name = "blog"

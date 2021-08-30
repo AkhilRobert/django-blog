@@ -1,14 +1,37 @@
-{% extends 'partials/_nav_base.html' %}
+{% extends 'partials/_base.html' %}
+
 {% load editorjs %}
 
 {% block title %}
-  {{ object.title }}
+    {{ object.title }}
 {% endblock title %}
 
 {% block content %}
-  <h1>{{ object.title }}</h1>
 
-  {{ object.content | editorjs }}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1>{{blog.title}}</h1>
+                <div class="d-flex pt-2 pb-4 gap-2">
+                    <img
+                        src="{{ MEDIA_URL }}/{{ blog.user.profile_photo }}"
+                        alt="{{ blog.user.username }}"
+                        class="image-fluid rounded-circle align-self-center"
+                        width="30"
+                        height="30"
+                        loading="lazy"
+                    >
+                    <p class="mb-0" >{{ blog.user.username }}</p>
+                    <p class="fw-light text-muted mb-0 ">
+                        {{ blog.created_at|date:"M d" }}
+                    </p>
+                </div>
+                <div class="card-content" >
+                    {{blog.content| editorjs}}
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

@@ -3,14 +3,13 @@
 {% block nav %}{% endblock nav %}
 
 {% block title %}
-  Login
+    Login
 {% endblock title %}
 
 {% block content %}
-  <h1>This is the Login page</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button>login</button>
-  </form>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button>login</button>
+    </form>
 {% endblock content %}

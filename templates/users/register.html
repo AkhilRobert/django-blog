@@ -6,12 +6,12 @@
 
 {% block content %}
 
-  <form method="post">
-    {% csrf_token %}
-      {{form}}
-    <button>submit</button>
-
-  </form>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button>submit</button>
+    </form>
 
 
 {% endblock content %}
+

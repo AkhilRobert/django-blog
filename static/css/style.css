@@ -20,3 +20,7 @@
     color: var(--bs-blue);
     cursor: pointer;
 }
+
+.card-content > img {
+    width: 100%;
+}
