@@ -26,6 +26,7 @@ class Command(BaseCommand):
             blog = Blog(
                 title=seeder.faker.sentence(),
                 user=random.choice(user),
+                # It is difficult to create content data using seeder
                 content=r"""{"time": 1629628939542, "blocks": [{"id": "iUoOJT-3aw", "type": "paragraph", "data": {"text": "asg"}}], "version": "2.22.2"}""",
                 is_private=random.choice([0, 1]),
             )

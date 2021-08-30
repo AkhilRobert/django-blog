@@ -1,0 +1,15 @@
+{% extends 'partials/_nav_base.html' %}
+{% load editorjs %}
+
+{% block title %}
+  {{ object.title }}
+{% endblock title %}
+
+{% block content %}
+  <h1>{{ object.title }}</h1>
+
+  {{ object.content | editorjs }}
+
+
+
+{% endblock content %}

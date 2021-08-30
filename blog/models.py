@@ -14,7 +14,8 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-    def get_likes_count(self):
+    @property
+    def likes_count(self):
         return self.likes.all().count()
 
     def get_comments_count(self):

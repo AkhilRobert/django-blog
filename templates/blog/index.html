@@ -3,44 +3,55 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-  <p>welcome {{user.username}}</p>
-  
-  {% if user.is_authenticated %}
-
-  <a href="{% url 'user:logout' %}">Logout</a>
-
-  {% else %}
-  <a href="{% url 'user:register' %}">Register</a>
-  <a href="{% url 'user:login' %}">Login</a>
-
-  {% endif %}
 
 
-    {% for b in blog %}
-      <p>
-        {{b.title}}
-        {{b.user.username}}
-      </p>
-    {% endfor %}
+    <div class="container gap-2 d-flex flex-column my-4">
+
+        {% comment %} List of blogs {% endcomment %}
+        {% for b in blog %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-content-center mb-4">
+
+                        {% if b.user.profile_photo %}
+                            <img
+                                src="{{ MEDIA_URL }}/{{ b.user.profile_photo }}"
+                                alt="{{ b.user.username }}"
+                                class="image-fluid rounded-circle align-self-center"
+                                width="30"
+                                height="30"
+                                loading="lazy"
+                            />
+                        {% else %}
+                            <img
+                                src="https://res.cloudinary.com/practicaldev/image/fetch/s--0m8Rs-k9--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/693571/b775ae4a-708a-43f7-aab3-343bcb1b9c2a.png"
+                                alt="{{ b.user.username }}"
+                                class="image-fluid rounded-circle align-self-center"
+                                width="30"
+                                height="30"
+                                loading="lazy"
+                            />
+                        {% endif %}
+
+                        <div class="d-flex flex-column mx-2 items-center">
+                            <p class="mb-0 fw-bold fs-smaller">{{ b.user.username }}</p>
+                            <p class="fw-light text-muted mb-0 fs-smaller">
+                                {{ b.created_at|date:"M d" }}
+                            </p>
+                        </div>
 
 
-   <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-        {% endif %}
+                    </div>
+                    <a
+                        class="card-title fw-bold poppins link"
+                        href="#"
+                    >{{ b.title }}</a>
+                </div>
+            </div>
+        {% endfor %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+        {% include 'blog/components/pagination.html' with page=page_obj %}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
-
-
-
+    </div>
 
 {% endblock content %}

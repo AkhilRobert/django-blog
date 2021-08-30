@@ -8,5 +8,5 @@ class BlogAdmin(admin.ModelAdmin):
         "title",
         "user",
         "get_comments_count",
-        "get_likes_count",
+        "likes_count",
     )
