@@ -3,7 +3,7 @@ from django_editorjs_fields import EditorJsWidget
 from .models import Blog
 
 
-class PostCreationFrom(forms.ModelForm):
+class PostCreateUpdateFrom(forms.ModelForm):
     class Meta:
         model = Blog
         fields = (

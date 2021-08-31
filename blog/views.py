@@ -1,11 +1,12 @@
 from typing import Any, Dict
 from django.http import HttpResponse
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.detail import DetailView
+from django.urls import reverse
 from comments.models import Comment
 from comments.forms import CreateCommentForm
 from .models import Blog
-from .forms import PostCreationFrom
+from .forms import PostCreateUpdateFrom
 
 
 class Home(ListView):
@@ -43,10 +44,31 @@ class BlogDetail(DetailView):
 class CreatePost(CreateView):
     model = Blog
     template_name = "blog/create.html"
-    form_class = PostCreationFrom
+    form_class = PostCreateUpdateFrom
 
-    def form_valid(self, form: PostCreationFrom) -> HttpResponse:
+    def form_valid(self, form: PostCreateUpdateFrom) -> HttpResponse:
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        self.success_url = reverse(
+            "blog:edit",
+            kwargs={
+                "pk": self.object.pk,
+            },
+        )
+        return super().form_valid(form)
+
+
+class EditPost(UpdateView):
+    model = Blog
+    template_name = "blog/update.html"
+    form_class = PostCreateUpdateFrom
+
+    def form_valid(self, form: PostCreateUpdateFrom) -> HttpResponse:
+        self.success_url = reverse(
+            "blog:edit",
+            kwargs={
+                "pk": self.object.pk,
+            },
+        )
         return super().form_valid(form)

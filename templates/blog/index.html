@@ -12,26 +12,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-content-center mb-4">
-                        {% comment %}
-                        {% if b.user.profile_photo %}
-                            <img
-                                src="{{ MEDIA_URL }}{{ b.user.profile_photo }}"
-                                alt="{{ b.user.username }}"
-                                class="image-fluid rounded-circle align-self-center"
-                                width="30"
-                                height="30"
-                                loading="lazy"
-                            />
-                        {% else %}
-                            <img
-                                src="https://res.cloudinary.com/practicaldev/image/fetch/s--0m8Rs-k9--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/693571/b775ae4a-708a-43f7-aab3-343bcb1b9c2a.png"
-                                alt="{{ b.user.username }}"
-                                class="image-fluid rounded-circle align-self-center"
-                                width="30"
-                                height="30"
-                                loading="lazy"
-                            />
-                        {% endif %} {% endcomment %}
 
                         {% include 'components/profile_photo.html' with user=b.user %}
 
