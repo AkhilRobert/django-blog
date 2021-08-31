@@ -1,3 +1,5 @@
+import os
+from typing import Any, Dict
 from uuid import UUID
 from django.shortcuts import redirect, render
 from django.http import HttpRequest
@@ -17,6 +19,7 @@ def register(request: HttpRequest) -> HttpRequest:
         return redirect(reverse("blog:home"))
 
     form = RegisterForm()
+    next = request.GET.get("next", None)
 
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -25,23 +28,10 @@ def register(request: HttpRequest) -> HttpRequest:
             user = form.save()
             login(request, user)
 
-            html_mail = render_to_string(
-                "users/mail.html",
-                {
-                    "token": user.verification_token,
-                },
-            )
-            plain_mail = strip_tags(html_mail)
+            if next is None:
+                return redirect(reverse("blog:home"))
 
-            send_mail(
-                "Verify your account",
-                plain_mail,
-                "akhilrobert@outlook.com",
-                [user.email],
-                html_message=html_mail,
-                fail_silently=True,
-            )
-            return redirect(reverse("blog:home"))
+            return redirect(next)
 
     return render(
         request,
@@ -67,6 +57,7 @@ def verify_user(request: HttpRequest, token: UUID) -> HttpRequest:
     return render(request, "users/verify/success.html")
 
 
+# TODO: Implement this
 class SendVerification(View):
     def get(self, requset: HttpRequest):
         if requset.user.is_anonymous:
@@ -78,14 +69,36 @@ class SendVerification(View):
 
     pass
 
+    # TODO: Check if properly implemented
     def post(self, request: HttpRequest):
-        pass
+
+        html_mail = render_to_string(
+            "users/mail.html",
+            {
+                "token": request.user.verification_token,
+            },
+        )
+        plain_mail = strip_tags(html_mail)
+
+        send_mail(
+            "Verify your account",
+            plain_mail,
+            os.environ.get("SENDER_MAIL"),
+            [request.user.email],
+            html_message=html_mail,
+            fail_silently=True,
+        )
 
 
 class LoginUser(LoginView):
     template_name = "users/login.html"
     success_url = reverse_lazy("blog:home")
     redirect_authenticated_user = True
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["next"] = self.request.GET.get("next")
+        return context
 
 
 class LogoutUser(LogoutView):

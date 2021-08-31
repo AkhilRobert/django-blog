@@ -188,5 +188,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-LOGIN_REDIRECT_URL = reverse_lazy("blog:home")
 LOGOUT_REDIRECT_URL = reverse_lazy("blog:home")

@@ -15,16 +15,25 @@
     </div>
 
     <div class='container mt-5'>
-        <form method="post" class="form">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <div class="form__button">
-                <button class="btn btn-primary" >login</button>
-            </div>
 
-            <p class="mt-6">Don't have an account ? <a href="{% url 'user:register' %}">Create now</a></p>
+        {% if next %}
+            <form action="{% url 'user:login' %}" method="post" class="form">
+        {% else %}
+            <form method="post" class="form">
+        {% endif %}
 
-        </form>
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <input name="next" type="hidden" value="{{ next }}" />
+
+        <div class="form__button">
+            <button class="btn btn-primary" >login</button>
+        </div>
+
+        <p class="mt-6">Don't have an account ? <a href="{% url 'user:register' %}">Create now</a></p>
+
+    </form>
     </div>
 
 

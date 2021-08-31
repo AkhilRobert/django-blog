@@ -21,53 +21,19 @@
                     <a
                         class="btn btn-outline-primary mr-3"
                         aria-current="page"
-                        href="{% url 'user:login' %}"
+                        href="{% url 'user:login' %}?next={{ request.get_full_path|urlencode }}"
                     >Log in</a>
                 </li>
                 <li class="nav-item">
                     <a
                         class="btn btn-primary"
                         aria-current="page"
-                        href="{% url 'user:register' %}"
+                        href="{% url 'user:register' %}?next={{ request.get_full_path|urlencode }}"
                     >Create Account</a>
                 </li>
             </ul>
 
         {% else %}
-
-            {% comment %} <div class="d-flex gap-2 align-items-end" >
-                <p class="mb-0">{{ user.username }}</p>
-                <img
-                    src="{{ MEDIA_URL }}{{ user.profile_photo }}"
-                    alt="{{ blog.user.username }}"
-                    class="image-fluid rounded-circle align-self-center"
-                    width="30"
-                    height="30"
-                    loading="lazy"
-                >
-            </div>
-
-
-            <div class="dropdown">
-                <button class="btn dropdown-toggle d-flex align-items-end" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="d-flex gap-2 align-items-end" >
-                        <p class="mb-0">{{ user.username }}</p>
-                        <img
-                            src="{{ MEDIA_URL }}{{ user.profile_photo }}"
-                            alt="{{ blog.user.username }}"
-                            class="image-fluid rounded-circle align-self-center"
-                            width="30"
-                            height="30"
-                            loading="lazy"
-                        >
-                    </div>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div> {% endcomment %}
 
 
             <div class="dropdown mr-6">
@@ -79,25 +45,7 @@
                     aria-expanded="false"
                 >
                     <p class="mb-0">{{ user.username }}</p>
-                    {% comment %} {% if user.profile_photo %}
-                        <img
-                            src="{{ user.profile_photo.url }}"
-                            alt="{{ blog.user.username }}"
-                            class="image-fluid rounded-circle align-self-center"
-                            width="30"
-                            height="30"
-                            loading="lazy"
-                        >
-                    {% else %}
-                        <img
-                            src="https://res.cloudinary.com/practicaldev/image/fetch/s--0m8Rs-k9--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/693571/b775ae4a-708a-43f7-aab3-343bcb1b9c2a.png"
-                            alt="{{ user.username }}"
-                            class="image-fluid rounded-circle align-self-center"
-                            width="30"
-                            height="30"
-                            loading="lazy"
-                        />
-                    {% endif %} {% endcomment %}
+
 
                     {% include 'components/profile_photo.html' with user=user %}
 

@@ -23,6 +23,7 @@ urlpatterns = [
     path("", include("blog.urls", namespace="blog")),
     path("user/", include("users.urls", namespace="user")),
     path("editorjs/", include("django_editorjs_fields.urls")),
+    path("comment/", include("comments.urls", namespace="comment")),
 ]
 
 urlpatterns += static(
