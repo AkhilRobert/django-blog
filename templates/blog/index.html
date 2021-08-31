@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-content-center mb-4">
-
+                        {% comment %}
                         {% if b.user.profile_photo %}
                             <img
                                 src="{{ MEDIA_URL }}{{ b.user.profile_photo }}"
@@ -31,7 +31,9 @@
                                 height="30"
                                 loading="lazy"
                             />
-                        {% endif %}
+                        {% endif %} {% endcomment %}
+
+                        {% include 'components/profile_photo.html' with user=b.user %}
 
                         <div class="d-flex flex-column mx-2 items-center">
                             <p class="mb-0 fw-bold fs-smaller">{{ b.user.username }}</p>

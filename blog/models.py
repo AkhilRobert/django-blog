@@ -15,10 +15,11 @@ class Blog(models.Model):
         return self.title
 
     @property
-    def likes_count(self):
+    def likes_count(self) -> int:
         return self.likes.all().count()
 
-    def get_comments_count(self):
+    @property
+    def comments_count(self) -> int:
         return self.comments.all().count()
 
     class Meta:

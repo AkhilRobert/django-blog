@@ -7,6 +7,6 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "user",
-        "get_comments_count",
+        "comments_count",
         "likes_count",
     )

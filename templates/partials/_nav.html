@@ -79,7 +79,7 @@
                     aria-expanded="false"
                 >
                     <p class="mb-0">{{ user.username }}</p>
-                    {% if user.profile_photo %}
+                    {% comment %} {% if user.profile_photo %}
                         <img
                             src="{{ user.profile_photo.url }}"
                             alt="{{ blog.user.username }}"
@@ -97,7 +97,10 @@
                             height="30"
                             loading="lazy"
                         />
-                    {% endif %}
+                    {% endif %} {% endcomment %}
+
+                    {% include 'components/profile_photo.html' with user=user %}
+
                 </div>
                 <div class="dropdown-menu nav__dropdown" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Create a post</a>

@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.utils.html import strip_tags
+from django.views import View
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import RegisterForm
 from .models import User, Verification
@@ -64,6 +65,21 @@ def verify_user(request: HttpRequest, token: UUID) -> HttpRequest:
     user.save()
     verfiy_token.delete()
     return render(request, "users/verify/success.html")
+
+
+class SendVerification(View):
+    def get(self, requset: HttpRequest):
+        if requset.user.is_anonymous:
+            return redirect(reverse("users:login"))
+
+        user: User = requset.user
+        if user.is_verified:
+            return redirect(reverse("blog:home"))
+
+    pass
+
+    def post(self, request: HttpRequest):
+        pass
 
 
 class LoginUser(LoginView):
