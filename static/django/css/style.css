@@ -56,11 +56,3 @@
         max-width: 90%;
     }
 }
-
-div[data-editorjs-holder] {
-    max-width: 100% !important;
-}
-
-form[data-create-post] > div {
-    width: 100%;
-}

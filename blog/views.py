@@ -1,9 +1,11 @@
 from typing import Any, Dict
-from django.views.generic import ListView
+from django.http import HttpResponse
+from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
-from .models import Blog
 from comments.models import Comment
 from comments.forms import CreateCommentForm
+from .models import Blog
+from .forms import PostCreationFrom
 
 
 class Home(ListView):
@@ -36,3 +38,15 @@ class BlogDetail(DetailView):
         context["comments"] = comments
 
         return context
+
+
+class CreatePost(CreateView):
+    model = Blog
+    template_name = "blog/create.html"
+    form_class = PostCreationFrom
+
+    def form_valid(self, form: PostCreationFrom) -> HttpResponse:
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
