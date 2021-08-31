@@ -1,8 +1,11 @@
 from typing import Any, Dict
 from django.http import HttpResponse
+from django.http.request import HttpRequest
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.detail import DetailView
+from django.views import View
 from django.urls import reverse
+from django.shortcuts import get_object_or_404, redirect
 from comments.models import Comment
 from comments.forms import CreateCommentForm
 from .models import Blog
@@ -72,3 +75,15 @@ class EditPost(UpdateView):
             },
         )
         return super().form_valid(form)
+
+
+class PublishNow(View):
+    def get(self, request: HttpRequest, pk):
+        if not request.user.is_authenticated:
+            return redirect(reverse("user:login"))
+
+        blog: Blog = get_object_or_404(Blog, pk=pk)
+        blog.is_private = not blog.is_private
+        blog.save()
+
+        return redirect(reverse("blog:edit", kwargs={"pk": pk}))

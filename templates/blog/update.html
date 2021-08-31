@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container mt-5">
+    <div class="container my-5">
         <form
             data-create-post
             action=""
@@ -13,7 +13,17 @@
         >
             {% csrf_token %}
             {{form|crispy}}
-            <button class="btn btn-primary align-self-end">save</button>
+
+            <div class="d-flex justify-content-end">
+                {% if blog.is_private %}
+                    <a class="btn btn-outline-primary mr-2" href="{% url 'blog:publish' blog.pk %}">Publish</a>
+                {% else %}
+                    <a class="btn btn-outline-primary mr-2" href="{% url 'blog:publish' blog.pk %}">Unpublish</a>
+                {% endif %}
+
+                <button class="btn btn-primary align-self-end">save</button>
+            </div>
+
         </form>
     </div>
 {% endblock content %}
